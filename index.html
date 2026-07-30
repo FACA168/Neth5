@@ -35,11 +35,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .btn-cs{width:100%;padding:14px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .1s}
 .btn-cs:active{transform:scale(.98)}
 .cs-time{font-size:11px;color:#94a3b8;text-align:center;margin-top:8px}
-.amount-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
-.amount-card{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .2s}
+.amount-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+.amount-card{background:#f8fafc;border:2px solid #e2e8f0;border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
 .amount-card.selected{border-color:#4a90d9;background:linear-gradient(135deg,#eff6ff,#dbeafe)}
-.amount-card .amt{font-size:22px;font-weight:800;color:#1e293b}
-.amount-card .gift{font-size:12px;color:#16a34a;font-weight:600;margin-top:4px}
+.amount-card .amt{font-size:20px;font-weight:800;color:#1e293b}
 .order-preview{background:linear-gradient(135deg,#fefce8,#fef3c7);border:2px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:14px;display:none}
 .order-preview.show{display:block;animation:slideDown .3s ease}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
@@ -55,7 +54,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 .qr-placeholder{color:#94a3b8;font-size:14px}
 .upload-area{border:2px dashed #cbd5e1;border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px}
 .upload-area.has-image{border-style:solid;border-color:#22c55e;padding:8px}
-.upload-preview{max-width:100%;max-height:220px;display:none;border-radius:8px}
+.upload-preview{max-width:160px;max-height:160px;display:none;border-radius:8px;margin:0 auto}
 .upload-area input{display:none}
 .pay-summary{background:linear-gradient(135deg,#4a90d9,#67b26f);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;text-align:center}
 .ps-phone{font-size:14px;opacity:.9;margin-bottom:4px}
@@ -129,10 +128,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 <div class="card">
 <div class="card-title">💰 选择充值金额</div>
 <div class="amount-grid" id="amountOptions">
-<div class="amount-card" data-amount="200" data-discount="28" onclick="selectAmount(this)"><div class="amt">¥200</div><div class="gift">赠28元券</div></div>
-<div class="amount-card" data-amount="300" data-discount="58" onclick="selectAmount(this)"><div class="amt">¥300</div><div class="gift">赠58元券</div></div>
-<div class="amount-card" data-amount="400" data-discount="98" onclick="selectAmount(this)"><div class="amt">¥400</div><div class="gift">赠98元券</div></div>
-<div class="amount-card" data-amount="500" data-discount="128" onclick="selectAmount(this)"><div class="amt">¥500</div><div class="gift">赠128元券</div></div>
+<div class="amount-card" data-amount="200" data-discount="28" onclick="selectAmount(this)"><div class="amt">¥200</div></div>
+<div class="amount-card" data-amount="300" data-discount="58" onclick="selectAmount(this)"><div class="amt">¥300</div></div>
+<div class="amount-card" data-amount="400" data-discount="98" onclick="selectAmount(this)"><div class="amt">¥400</div></div>
+<div class="amount-card" data-amount="500" data-discount="128" onclick="selectAmount(this)"><div class="amt">¥500</div></div>
 </div>
 <div class="order-preview" id="orderPreview">
 <div class="op-title">📋 订单信息确认</div>
@@ -146,8 +145,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-
 <div class="card">
 <div class="card-title">📱 选择付款方式</div>
 <div class="pay-methods">
-<div class="pay-tab active" onclick="switchPayment('wechat',this)">💚 微信支付</div>
-<div class="pay-tab" onclick="switchPayment('alipay',this)">💙 支付宝</div>
+<div class="pay-tab active" onclick="switchPayment('wechat',this)">微信支付</div>
+<div class="pay-tab" onclick="switchPayment('alipay',this)">支付宝</div>
 </div>
 <button class="btn-primary" onclick="goToPay()">下一步：确认支付 →</button>
 </div>
