@@ -9,7 +9,7 @@ if(!/^1\d{10}$/.test(phone)){errEl.classList.add('visible');phoneEl.classList.ad
 errEl.classList.remove('visible');phoneEl.classList.remove('input-error');btn.disabled=true;statusEl.innerHTML='<span class="status-dot"></span>正在领取代金券…';
 api('/api/voucher',{method:'POST',body:JSON.stringify({phone})}).then(d=>{currentPhone=phone;currentVoucherCode=d.code;statusEl.innerHTML='✅ 代金券已绑定：<b>'+d.code+'</b>';nextBtn.disabled=false;nextBtn.style.display='block';toast('领取成功');}).catch(e=>{statusEl.textContent='❌ '+e.message;toast('领取失败');}).finally(()=>{btn.disabled=false;});}
 function goToRecharge(){switchPage('pageRecharge');}
-function genOrderId(){return 'ORD'+Date.now().toString().slice(-9)+Math.floor(Math.random()*900+100);}
+function genOrderId(){return 'yj'+Date.now().toString().slice(-9)+Math.floor(Math.random()*900+100);}
 function selectAmount(el){document.querySelectorAll('#amountOptions .amount-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');selectedAmount=parseInt(el.dataset.amount,10)||0;selectedDiscount=parseInt(el.dataset.discount,10)||0;currentOrderId=genOrderId();
 const actual=selectedAmount-selectedDiscount;
 document.getElementById('opOrderId').textContent=currentOrderId;
