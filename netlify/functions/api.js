@@ -25,8 +25,8 @@ export default async(req,ctx)=>{
    if(!list.documents.length)await db.createDocument(databaseId,VOUCHERS_COLL,ID.unique(),{phone,code,status:'active'});
    return json({code});
   }
-  // 读设置
-  if(method==='GET'&&path==='/api/settings'){try{return json(await db.getDocument(databaseId,SETTINGS_COLL,SETTINGS_ID));}catch(e){return json({});}}
+  // 读设置（不返回密码明文，只暴露是否已设密码）
+  if(method==='GET'&&path==='/api/settings'){try{const d=await db.getDocument(databaseId,SETTINGS_COLL,SETTINGS_ID);const out={...d};delete out.admin_password;out.has_password=!!d.admin_password;return json(out);}catch(e){return json({has_password:false});}}
   // 存设置
   if(method==='POST'&&path==='/api/settings'){
    const body=await req.json();let ex=false;try{await db.getDocument(databaseId,SETTINGS_COLL,SETTINGS_ID);ex=true;}catch(e){}
