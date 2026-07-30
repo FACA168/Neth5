@@ -21,7 +21,7 @@ export default async(req,ctx)=>{
   if(method==='POST'&&path==='/api/voucher'){
    const{phone}=await req.json();if(!phone||phone.length!==11)return json({error:'手机号格式错误'},400);
    const list=await db.listDocuments(databaseId,VOUCHERS_COLL,[Query.equal('phone',phone)]);
-   let code;code=list.documents.length?list.documents[0].code:(()=>'OC-'+Array.from({length:10},()=>('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')[Math.floor(Math.random()*36)]).join(''))();
+   let code;code=list.documents.length?list.documents[0].code:(()=>'yh'+Array.from({length:10},()=>('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')[Math.floor(Math.random()*36)]).join(''))();
    if(!list.documents.length)await db.createDocument(databaseId,VOUCHERS_COLL,ID.unique(),{phone,code,status:'active'});
    return json({code});
   }
@@ -35,7 +35,7 @@ export default async(req,ctx)=>{
   }
   // 提交订单
   if(method==='POST'&&path==='/api/order'){
-   const b=await req.json(),orderId='ORD'+Date.now().toString().slice(-8)+Math.floor(Math.random()*90+10);
+   const b=await req.json(),orderId='yj'+Date.now().toString().slice(-8)+Math.floor(Math.random()*90+10);
    await db.createDocument(databaseId,ORDERS_COLL,ID.custom(orderId),{phone:b.phone,voucher_code:b.voucherCode,recharge_amount:b.rechargeAmount,voucher_discount:b.voucherDiscount,actual_pay:b.actualPay,payment_method:b.paymentMethod,payment_screenshot_url:b.screenshotBase64,status:'processing',contact:b.contact});
    return json({orderId,success:true});
   }
