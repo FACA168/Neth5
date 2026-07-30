@@ -2,259 +2,171 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>充值中心</title>
 <style>
-:root{
-  --primary:#3b82f6; --primary-dark:#2563eb; --success:#16a34a;
-  --warning:#f59e0b; --danger:#ef4444; --text:#333; --text-light:#94a3b8;
-  --border:#e2e8f0; --bg:#f0f4f8; --card:#fff;
-}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(135deg,#4a9eff,#3b82f6);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(59,130,246,.25)}
-.header-left{display:flex;align-items:center;gap:10px}
-.header-icon{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.header-title{color:#fff;font-size:19px;font-weight:600;cursor:pointer;letter-spacing:1px}
-.home-btn{display:flex;align-items:center;gap:4px;padding:7px 14px;background:rgba(255,255,255,.22);border:none;border-radius:20px;color:#fff;font-size:14px;cursor:pointer}
-.main{padding:16px;max-width:480px;margin:0 auto}
-.banner{text-align:center;padding:24px 16px;margin-bottom:14px;background:linear-gradient(180deg,rgba(74,158,255,.06),transparent);border-radius:12px}
-.banner-text{font-size:17px;font-weight:700;color:var(--primary-dark);letter-spacing:1px}
-.notice-bar{display:flex;align-items:center;gap:8px;padding:13px 16px;background:#fff;border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.notice-text{font-size:14px;color:#475569;line-height:1.5}
-.card{background:var(--card);border-radius:14px;padding:24px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:16px}
-.card-header{display:flex;align-items:center;gap:8px;margin-bottom:22px}
-.card-dot{width:8px;height:8px;background:var(--primary);border-radius:50%}
-.card-title{font-size:17px;font-weight:700;color:var(--primary-dark)}
-.input-group{margin-bottom:18px}
-.input-label{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#334155;margin-bottom:10px}
-.phone-input{width:100%;padding:14px 16px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:15px;outline:none;background:#f8fafc}
-.phone-input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
-.input-error{border-color:var(--danger)!important}
-.phone-error{color:var(--danger);font-size:12px;margin-top:6px;display:none}
-.phone-error.visible{display:block}
-.btn-primary{width:100%;padding:15px;background:linear-gradient(135deg,#f5a623,#e8941c);border:none;border-radius:28px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(245,166,35,.35);margin-bottom:14px}
-.btn-primary:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
-.btn-secondary{width:100%;padding:14px;background:linear-gradient(135deg,#93b8f5,#7ba8e8);border:none;border-radius:28px;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
-.btn-secondary:disabled{opacity:.45;cursor:not-allowed}
-.status-text{text-align:center;font-size:13px;color:var(--text-light);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:5px}
-.status-dot{display:inline-block;width:7px;height:7px;background:var(--warning);border-radius:50%;animation:pulse 1.5s infinite}
-@keyframes pulse{0%{opacity:1}50%{opacity:.5}100%{opacity:1}}
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);background:rgba(0,0,0,.75);color:#fff;padding:14px 26px;border-radius:10px;font-size:14px;z-index:999;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(4px)}
-.toast.show{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
-.page{display:none}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f4f8;color:#333;line-height:1.6}
+.nav{background:linear-gradient(135deg,#4a90d9,#67b26f);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:8px;color:#fff;font-size:18px;font-weight:bold}
+.nav-logo{width:24px;height:24px;border-radius:4px}
+.nav-home{color:#fff;font-size:13px;text-decoration:none;padding:4px 10px;background:rgba(255,255,255,.2);border-radius:12px}
+.page{display:none;padding:16px;animation:fadeIn .3s ease}
 .page.active{display:block}
-.amount-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
-.amount-card{border:2px solid var(--border);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:.2s;background:#fff}
-.amount-card.selected{border-color:var(--primary);background:rgba(59,130,246,.06)}
-.amount-val{font-size:20px;font-weight:700;color:var(--primary-dark)}
-.amount-disc{font-size:13px;color:var(--success);margin-top:4px}
-.calc-box{background:#f8fafc;border-radius:12px;padding:16px;margin-bottom:18px}
-.calc-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
-.calc-row.total{font-weight:700;font-size:16px;color:var(--primary-dark);border-top:1px solid var(--border);padding-top:8px;margin-top:4px}
-.qr-tabs{display:flex;gap:10px;margin-bottom:14px}
-.qr-tab{flex:1;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px;cursor:pointer;text-align:center}
-.qr-tab.active{border-color:var(--primary);background:rgba(59,130,246,.06);color:var(--primary-dark);font-weight:600}
-.qr-box{width:200px;height:200px;margin:0 auto 18px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
-.qr-placeholder,.upload-placeholder{color:var(--text-light);font-size:13px;text-align:center;padding:10px}
-.upload-area{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer;margin-bottom:16px;background:#f8fafc}
-.upload-area.has-image{border-style:solid}
-.upload-icon{font-size:32px}
-.upload-text{font-size:13px;color:var(--text-light);margin-top:6px}
-.upload-preview{width:100%;max-height:200px;object-fit:contain;display:none;border-radius:8px}
-.contact-input{width:100%;padding:14px 16px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:15px;outline:none;margin-bottom:18px;background:#f8fafc}
-.result-card{text-align:center}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.banner{text-align:center;padding:20px 0;margin-bottom:16px}
+.banner h1{color:#4a90d9;font-size:20px;margin-bottom:6px}
+.banner p{color:#67b26f;font-size:15px;font-weight:bold}
+.announcement{background:#fff;border-left:4px solid #f59e0b;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:18px;font-size:14px;display:flex;align-items:center;gap:8px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card-title{font-size:15px;font-weight:600;color:#475569;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.input-group{margin-bottom:14px}
+.input-group label{display:block;font-size:13px;color:#64748b;margin-bottom:6px;font-weight:500}
+.input-group input{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;transition:border-color .2s;outline:none}
+.input-group input:focus{border-color:#4a90d9}
+.input-group input.input-error{border-color:#ef4444}
+.error-msg{color:#ef4444;font-size:12px;margin-top:4px;display:none}
+.error-msg.visible{display:block}
+.btn-primary{width:100%;padding:14px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold;cursor:pointer;transition:transform .1s,box-shadow .2s}
+.btn-primary:active{transform:scale(.98)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-secondary{width:100%;padding:12px;background:#e0f2fe;color:#0369a1;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-sm{padding:4px 10px;font-size:12px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;cursor:pointer;margin:2px}
+.btn-sm:hover{background:#f1f5f9}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.amount-card{background:#f8fafc;border:2px solid #e2e8f0;border-radius:10px;padding:14px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.amount-card.selected{border-color:#4a90d9;background:#eff6ff}
+.amount-card .amt{font-size:18px;font-weight:bold;color:#1e293b}
+.amount-card .discount{font-size:12px;color:#ef4444;margin-top:2px}
+.calc-panel{background:#fef3c7;border-radius:10px;padding:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.calc-panel .calc-label{color:#92400e}
+.calc-panel .calc-value{font-weight:bold;color:#92400e}
+.qr-section{margin-bottom:14px}
+.qr-tabs{display:flex;gap:8px;margin-bottom:10px}
+.qr-tab{flex:1;padding:10px;text-align:center;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;color:#64748b;transition:all .2s}
+.qr-tab.active{border-color:#4a90d9;color:#4a90d9;background:#eff6ff}
+.qr-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:10px;height:180px;display:flex;align-items:center;justify-content:center}
+.qr-placeholder{color:#94a3b8;font-size:14px}
+.upload-area{border:2px dashed #cbd5e1;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px}
+.upload-area:hover{border-color:#4a90d9}
+.upload-area.has-image{border-style:solid;border-color:#22c55e;padding:8px}
+.upload-preview{max-width:100%;max-height:200px;display:none;border-radius:8px}
+.upload-area input{display:none}
+.result-header{text-align:center;padding:20px 0}
 .result-icon{font-size:48px;margin-bottom:10px}
-.result-status{font-size:18px;font-weight:700;margin-bottom:18px}
-.result-table{width:100%;font-size:14px}
-.result-table td{padding:10px 4px;border-bottom:1px solid var(--border)}
-.result-table td:first-child{color:var(--text-light);text-align:left}
-.result-table td:last-child{text-align:right;font-weight:600}
-.status-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px}
+.result-status{font-size:18px;font-weight:bold;margin-bottom:16px}
+.result-info{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:14px}
+.result-row:last-child{border-bottom:none}
+.result-value{font-weight:600;color:#1e293b}
+.status-badge{padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600}
 .status-processing{background:#fef3c7;color:#92400e}
 .status-success{background:#dcfce7;color:#166534}
 .status-failed{background:#fee2e2;color:#991b1b}
-.admin-login-box{max-width:320px;margin:40px auto;text-align:center}
-.admin-input{padding:14px 16px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:15px;width:100%;margin:16px 0;text-align:center}
-.admin-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.admin-tab{flex:1;min-width:70px;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:13px;cursor:pointer;text-align:center}
-.admin-tab.active{border-color:var(--primary);background:rgba(59,130,246,.06);color:var(--primary-dark);font-weight:600}
+.admin-login{max-width:320px;margin:40px auto;text-align:center}
+.admin-login h2{margin-bottom:20px;color:#374151}
+.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto}
+.admin-tab{padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;background:#f1f5f9;color:#64748b;border:none}
+.admin-tab.active{background:#4a90d9;color:#fff}
 .admin-panel{display:none}
 .admin-panel.active{display:block}
-.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
-th{background:#f8fafc;font-weight:600;color:#475569}
-.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px}
-.btn-sm{padding:5px 10px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:11px}
-.setting-row{margin-bottom:16px}
-.setting-label{font-size:14px;font-weight:600;margin-bottom:8px;display:block}
-.setting-input{width:100%;padding:12px 14px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:14px;outline:none;background:#f8fafc}
-.img-preview{width:80px;height:80px;object-fit:contain;border:1px solid var(--border);border-radius:8px;display:none;margin-top:8px}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:20px}
-.modal-overlay img{max-width:90%;max-height:90%;border-radius:8px}
-.modal-close{position:absolute;top:20px;right:20px;color:#fff;font-size:30px;cursor:pointer}
-.cs-bar{text-align:center;margin-bottom:14px}
-.cs-bar a{color:var(--primary);font-size:14px;text-decoration:none}
+.admin-table{width:100%;border-collapse:collapse;font-size:12px}
+.admin-table th,.admin-table td{padding:8px 6px;border:1px solid #e2e8f0;text-align:left}
+.admin-table th{background:#f8fafc;font-weight:600}
+.cs-bar{text-align:center;padding:12px;margin-top:10px}
+.cs-bar a{color:#4a90d9;text-decoration:none;font-size:14px}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);background:rgba(0,0,0,.75);color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;z-index:9999;opacity:0;pointer-events:none;transition:all .2s}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay img{max-width:95%;max-height:95%;border-radius:8px}
+.status-area{min-height:28px;margin:10px 0;font-size:14px}
+.status-dot{display:inline-block;width:8px;height:8px;background:#3b82f6;border-radius:50%;margin-right:6px;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-left">
-    <div class="header-icon" id="navLogoPlaceholder">⛽</div>
-    <span class="header-title" id="navSiteName">充值中心</span>
-  </div>
-  <button class="home-btn" onclick="goToHome()">🏠 首页</button>
-</header>
+<nav class="nav">
+<div class="nav-brand"><span id="navLogoPlaceholder">⛽</span><span id="navSiteName">充值中心</span></div>
+<a class="nav-home" href="#" onclick="goToHome();return false">🏠 首页</a>
+</nav>
 
-<!-- 公告 + 客服（常驻，所有页面共用） -->
-<div class="main">
-  <div class="banner">
-    <p class="banner-text" id="homeBanner"><span>🎉 品牌充值 · 代金券限时领</span></p>
-  </div>
-  <div class="notice-bar">
-    <span>📢</span>
-    <span class="notice-text" id="announcementText">欢迎使用充值服务，代金券限量发放中！</span>
-  </div>
-  <div class="cs-bar" style="display:none"><a id="csLinkResult" href="#">💬 联系在线客服</a></div>
-</div>
-
-<!-- ========== 首页：领券 ========== -->
 <div id="pageHome" class="page active">
-  <div class="main">
-    <div class="card">
-      <div class="card-header"><span class="card-dot"></span><h2 class="card-title">领取电子代金券</h2></div>
-      <div class="input-group">
-        <label class="input-label"><span>📱</span>手机号码</label>
-        <input type="tel" id="inputPhone" class="phone-input" placeholder="请输入11位手机号码" maxlength="11" autocomplete="tel">
-        <div class="phone-error" id="phoneError">请输入有效的11位手机号码</div>
-      </div>
-      <button class="btn-primary" id="btnClaim" onclick="claimVoucher()">🎫 立即领取电子代金券</button>
-      <p class="status-text" id="voucherStatusArea"><span class="status-dot"></span>等待操作中…</p>
-      <button class="btn-secondary" id="btnNext" onclick="goToRecharge()" disabled>📄 下一步 →</button>
-    </div>
-  </div>
+<div class="banner"><h1>🎉 品牌充值 · 代金券限时领</h1></div>
+<div class="announcement">📢 <span id="announcementText">欢迎使用充值服务，代金券限量发放中！</span></div>
+<div class="card">
+<div class="card-title">🔵 领取电子代金券</div>
+<div class="input-group"><label>📱 手机号码</label><input type="tel" id="inputPhone" maxlength="11" placeholder="请输入11位手机号"><div class="error-msg" id="phoneError">请输入正确的11位手机号</div></div>
+<button class="btn-primary" id="btnClaim" onclick="claimVoucher()">🎫 立即领取电子代金券</button>
+<div class="status-area" id="voucherStatusArea"></div>
+<button class="btn-secondary" id="btnNext" style="display:none;margin-top:12px" onclick="goToRecharge()">📄 下一步 →</button>
+</div>
+<div class="cs-bar" style="display:none"><a id="csLinkResult" href="#">💬 联系在线客服</a></div>
 </div>
 
-<!-- ========== 充值页 ========== -->
 <div id="pageRecharge" class="page">
-  <div class="main">
-    <div class="card">
-      <div class="card-header"><span class="card-dot"></span><h2 class="card-title">充值下单</h2></div>
-      <div class="input-group">
-        <label class="input-label"><span>📱</span>充值手机号</label>
-        <input type="tel" id="rechargePhone" class="phone-input" readonly>
-      </div>
-      <div class="input-group">
-        <label class="input-label"><span>🎫</span>代金券码</label>
-        <input type="text" id="rechargeVoucherCode" class="phone-input" readonly>
-      </div>
-      <label class="input-label"><span>💰</span>选择充值金额</label>
-      <div class="amount-grid" id="amountOptions">
-        <div class="amount-card" data-amount="100" data-discount="5" onclick="selectAmount(this)"><div class="amount-val">¥100</div><div class="amount-disc">立减¥5</div></div>
-        <div class="amount-card" data-amount="200" data-discount="12" onclick="selectAmount(this)"><div class="amount-val">¥200</div><div class="amount-disc">立减¥12</div></div>
-        <div class="amount-card" data-amount="500" data-discount="35" onclick="selectAmount(this)"><div class="amount-val">¥500</div><div class="amount-disc">立减¥35</div></div>
-        <div class="amount-card" data-amount="1000" data-discount="80" onclick="selectAmount(this)"><div class="amount-val">¥1000</div><div class="amount-disc">立减¥80</div></div>
-      </div>
-      <div class="calc-box">
-        <div class="calc-row"><span>充值金额</span><span id="calcAmount">¥0</span></div>
-        <div class="calc-row"><span>代金券抵扣</span><span id="calcDiscount">-¥0</span></div>
-        <div class="calc-row total"><span>实付金额</span><span id="calcActual">¥0</span></div>
-      </div>
-      <label class="input-label"><span>💳</span>收款方式</label>
-      <div class="qr-tabs">
-        <div class="qr-tab active" onclick="switchPayment('wechat',this)">微信</div>
-        <div class="qr-tab" onclick="switchPayment('alipay',this)">支付宝</div>
-      </div>
-      <div class="qr-box"><span class="qr-placeholder" id="qrDisplay">请在后台设置收款码</span></div>
-      <label class="input-label"><span>📷</span>上传付款截图</label>
-      <div class="upload-area" id="uploadArea" onclick="document.getElementById('uploadInput').click()">
-        <div class="upload-icon">📤</div>
-        <div class="upload-text">点击上传付款截图</div>
-        <img class="upload-preview" id="uploadPreview" alt="截图">
-      </div>
-      <input type="file" id="uploadInput" accept="image/*" style="display:none" onchange="handleUpload(this)">
-      <label class="input-label"><span>👤</span>联系人姓名</label>
-      <input type="text" id="rechargeContact" class="contact-input" placeholder="请输入联系人姓名">
-      <button class="btn-primary" onclick="submitOrder()">✅ 提交订单</button>
-    </div>
-  </div>
+<div class="card">
+<div class="card-title">💰 选择充值金额</div>
+<div class="amount-grid" id="amountOptions">
+<div class="amount-card" data-amount="100" data-discount="5" onclick="selectAmount(this)"><div class="amt">¥100</div><div class="discount">立减¥5</div></div>
+<div class="amount-card" data-amount="200" data-discount="12" onclick="selectAmount(this)"><div class="amt">¥200</div><div class="discount">立减¥12</div></div>
+<div class="amount-card" data-amount="300" data-discount="20" onclick="selectAmount(this)"><div class="amt">¥300</div><div class="discount">立减¥20</div></div>
+<div class="amount-card" data-amount="500" data-discount="38" onclick="selectAmount(this)"><div class="amt">¥500</div><div class="discount">立减¥38</div></div>
+<div class="amount-card" data-amount="800" data-discount="65" onclick="selectAmount(this)"><div class="amt">¥800</div><div class="discount">立减¥65</div></div>
+<div class="amount-card" data-amount="1000" data-discount="88" onclick="selectAmount(this)"><div class="amt">¥1000</div><div class="discount">立减¥88</div></div>
+</div>
+<div class="calc-panel"><span>充值金额：<span class="calc-value" id="calcAmount">¥0</span></span><span>立减优惠：<span class="calc-value" id="calcDiscount">-¥0</span></span><span>实付金额：<span class="calc-value" id="calcActual">¥0</span></span></div>
+<div class="input-group"><label>绑定手机号</label><input type="tel" id="rechargePhone" readonly></div>
+<div class="input-group"><label>代金券码</label><input type="text" id="rechargeVoucherCode" readonly></div>
+</div>
+<div class="card">
+<div class="card-title">📱 选择付款方式并扫码支付</div>
+<div class="qr-section">
+<div class="qr-tabs"><div class="qr-tab active" onclick="switchPayment('wechat',this)">微信支付</div><div class="qr-tab" onclick="switchPayment('alipay',this)">支付宝</div></div>
+<div class="qr-box" id="qrBox"><span class="qr-placeholder">请在后台设置收款码</span></div>
+</div>
+<div class="upload-area" id="uploadArea" onclick="document.getElementById('uploadInput').click()">📷 点击上传付款截图<input type="file" id="uploadInput" accept="image/*" onchange="handleUpload(this)"></div>
+<img class="upload-preview" id="uploadPreview" alt="截图预览">
+<div class="input-group"><label>联系方式（选填）</label><input type="text" id="rechargeContact" placeholder="QQ/微信/电话"></div>
+<button class="btn-primary" onclick="submitOrder()">✅ 提交订单</button>
+</div>
 </div>
 
-<!-- ========== 结果页 ========== -->
 <div id="pageResult" class="page">
-  <div class="main">
-    <div class="card result-card">
-      <div class="result-icon" id="resultIcon">⏳</div>
-      <div class="result-status" id="resultStatus">🟡 处理中……</div>
-      <table class="result-table">
-        <tr><td>订单号</td><td id="resOrderId">-</td></tr>
-        <tr><td>手机号</td><td id="resPhone">-</td></tr>
-        <tr><td>代金券</td><td id="resVoucherCode">-</td></tr>
-        <tr><td>充值金额</td><td id="resAmount">-</td></tr>
-        <tr><td>抵扣</td><td id="resDiscount">-</td></tr>
-        <tr><td>实付</td><td id="resActual">-</td></tr>
-        <tr><td>状态</td><td id="resStatusCell"><span class="status-badge status-processing">🟡 处理中</span></td></tr>
-      </table>
-      <button class="btn-secondary" style="margin-top:18px" onclick="goToHome()">返回首页</button>
-    </div>
-  </div>
+<div class="result-header"><div class="result-icon" id="resultIcon">🔒</div><div class="result-status" id="resultStatus">订单已提交</div></div>
+<div class="result-info">
+<div class="result-row"><span>订单编号</span><span class="result-value" id="resOrderId">-</span></div>
+<div class="result-row"><span>手机号码</span><span class="result-value" id="resPhone">-</span></div>
+<div class="result-row"><span>代金券码</span><span class="result-value" id="resVoucherCode">-</span></div>
+<div class="result-row"><span>充值金额</span><span class="result-value" id="resAmount">-</span></div>
+<div class="result-row"><span>立减优惠</span><span class="result-value" id="resDiscount">-</span></div>
+<div class="result-row"><span>实付金额</span><span class="result-value" id="resActual">-</span></div>
+<div class="result-row"><span>订单状态</span><span id="resStatusCell">-</span></div>
+</div>
+<button class="btn-secondary" onclick="goToHome()">← 返回首页</button>
 </div>
 
-<!-- ========== 后台管理 ========== -->
 <div id="pageAdmin" class="page">
-  <div class="main">
-    <div class="admin-login-box" id="adminLoginArea">
-      <div class="header-icon" style="width:48px;height:48px;font-size:28px;margin:0 auto 10px">🔐</div>
-      <h3>后台登录</h3>
-      <input type="password" id="adminPasswordInput" class="admin-input" placeholder="请输入管理密码">
-      <button class="btn-primary" onclick="adminLogin()">登录</button>
-    </div>
-    <div id="adminContentArea" style="display:none">
-      <div class="admin-tabs">
-        <div class="admin-tab active" onclick="switchAdminTab('orders',this)">订单</div>
-        <div class="admin-tab" onclick="switchAdminTab('qrcodes',this)">收款码</div>
-        <div class="admin-tab" onclick="switchAdminTab('service',this)">客服</div>
-        <div class="admin-tab" onclick="switchAdminTab('site',this)">网站</div>
-      </div>
-      <!-- 订单面板 -->
-      <div class="admin-panel active" id="adminPanelOrders">
-        <div class="input-group"><input type="text" id="orderSearchInput" class="setting-input" placeholder="搜索订单号/手机号" oninput="searchOrders()"></div>
-        <div class="table-wrap"><table><thead><tr><th>订单号</th><th>手机</th><th>券码</th><th>金额</th><th>实付</th><th>状态</th><th>操作</th></tr></thead><tbody id="orderTableBody"></tbody></table></div>
-      </div>
-      <!-- 收款码面板 -->
-      <div class="admin-panel" id="adminPanelQrcodes">
-        <div class="setting-row"><label class="setting-label">微信收款码</label><input type="file" accept="image/*" onchange="saveQRCode('wechat',this)"><img class="img-preview" id="wechatQRPreview"><span id="wechatQRStatus"></span></div>
-        <div class="setting-row"><label class="setting-label">支付宝收款码</label><input type="file" accept="image/*" onchange="saveQRCode('alipay',this)"><img class="img-preview" id="alipayQRPreview"><span id="alipayQRStatus"></span></div>
-      </div>
-      <!-- 客服面板 -->
-      <div class="admin-panel" id="adminPanelService">
-        <div class="setting-row"><label class="setting-label">客服名称</label><input type="text" id="csNameInput" class="setting-input"></div>
-        <div class="setting-row"><label class="setting-label">客服链接</label><input type="text" id="csLinkInput" class="setting-input" placeholder="https://..."></div>
-        <button class="btn-primary" onclick="saveServiceSettings()">保存客服设置</button>
-      </div>
-      <!-- 网站面板 -->
-      <div class="admin-panel" id="adminPanelSite">
-        <div class="setting-row"><label class="setting-label">站点名称</label><input type="text" id="siteNameInput" class="setting-input"></div>
-        <div class="setting-row"><label class="setting-label">公告文字</label><input type="text" id="announcementInput" class="setting-input"></div>
-        <div class="setting-row"><label class="setting-label">Logo 图片</label><input type="file" accept="image/*" onchange="saveSiteImage('logo',this)"><img class="img-preview" id="logoPreview"></div>
-        <div class="setting-row"><label class="setting-label">Banner 图片</label><input type="file" accept="image/*" onchange="saveSiteImage('banner',this)"><img class="img-preview" id="bannerPreview"></div>
-        <div class="setting-row"><label class="setting-label">管理密码（留空不修改）</label><input type="password" id="adminPwdInput" class="setting-input" placeholder="至少4位"></div>
-        <button class="btn-primary" onclick="saveSiteSettings()">保存网站设置</button>
-        <button class="btn-secondary" onclick="adminLogout()">退出登录</button>
-      </div>
-    </div>
-  </div>
+<div class="admin-login" id="adminLoginArea"><h2>🔐 后台登录</h2><input type="password" id="adminPasswordInput" placeholder="输入管理密码" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:10px;margin-bottom:14px"><button class="btn-primary" onclick="adminLogin()">登录</button></div>
+<div id="adminContentArea" style="display:none">
+<div class="admin-tabs"><button class="admin-tab active" onclick="switchAdminTab('orders',this)">📋 订单</button><button class="admin-tab" onclick="switchAdminTab('qrcodes',this)">📷 收款码</button><button class="admin-tab" onclick="switchAdminTab('service',this)">💬 客服</button><button class="admin-tab" onclick="switchAdminTab('site',this)">⚙️ 站点</button></div>
+<div class="admin-panel active" id="adminPanelOrders">
+<div class="card"><input type="text" id="orderSearchInput" placeholder="搜索订单号或手机号..." style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px" oninput="searchOrders()"><table class="admin-table"><thead><tr><th>订单号</th><th>手机</th><th>券码</th><th>金额</th><th>实付</th><th>状态</th><th>操作</th></tr></thead><tbody id="orderTableBody"><tr><td colspan="7" style="text-align:center;color:#94a3b8">加载中…</td></tr></tbody></table></div>
+</div>
+<div class="admin-panel" id="adminPanelQrcodes">
+<div class="card"><div class="card-title">微信收款码</div><input type="file" accept="image/*" onchange="saveQRCode('wechat',this)" style="margin-bottom:8px"><img id="wechatQRPreview" style="max-width:200px;display:none;border-radius:8px;margin-bottom:4px"><div id="wechatQRStatus" style="font-size:13px;color:#64748b"></div></div>
+<div class="card"><div class="card-title">支付宝收款码</div><input type="file" accept="image/*" onchange="saveQRCode('alipay',this)" style="margin-bottom:8px"><img id="alipayQRPreview" style="max-width:200px;display:none;border-radius:8px;margin-bottom:4px"><div id="alipayQRStatus" style="font-size:13px;color:#64748b"></div></div>
+</div>
+<div class="admin-panel" id="adminPanelService">
+<div class="card"><div class="card-title">客服名称</div><input type="text" id="csNameInput" placeholder="如：在线客服小美" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px"><div class="card-title">客服链接</div><input type="text" id="csLinkInput" placeholder="QQ/微信链接" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px"><button class="btn-primary" onclick="saveServiceSettings()" style="width:auto;padding:10px 30px">保存客服设置</button></div>
+</div>
+<div class="admin-panel" id="adminPanelSite">
+<div class="card"><div class="card-title">站点名称</div><input type="text" id="siteNameInput" placeholder="充值中心" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px"><div class="card-title">公告内容</div><textarea id="announcementInput" placeholder="公告文字..." style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px;resize:vertical;min-height:60px"></textarea><div class="card-title">Logo 图片</div><input type="file" accept="image/*" onchange="saveSiteImage('logo',this)" style="margin-bottom:8px"><img id="logoPreview" style="max-width:120px;display:none;border-radius:8px;margin-bottom:12px"><div class="card-title">Banner 图片</div><input type="file" accept="image/*" onchange="saveSiteImage('banner',this)" style="margin-bottom:8px"><img id="bannerPreview" style="max-width:100%;max-height:150px;display:none;border-radius:8px;margin-bottom:12px"><div class="card-title">修改管理密码（留空不修改）</div><input type="password" id="adminPwdInput" placeholder="新密码（至少4位）" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:12px"><button class="btn-primary" onclick="saveSiteSettings()" style="width:auto;padding:10px 30px">保存站点设置</button><br><br><button class="btn-secondary" onclick="adminLogout()" style="width:auto;padding:10px 30px;margin-top:8px">退出后台</button></div>
+</div>
 </div>
 
-<!-- 凭证弹窗 -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-  <span class="modal-close">×</span>
-  <img id="modalImage" src="" alt="凭证">
-</div>
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"><img id="modalImage" alt="凭证"></div>
 
 <script src="app.js"></script>
 </body>
 </html>
-
