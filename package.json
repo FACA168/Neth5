@@ -1,9 +1,1 @@
-{
-  "name": "recharge-h5",
-  "version": "1.0.0",
-  "description": "纯前端 H5 充值系统，Netlify + Appwrite 后端",
-  "type": "module",
-  "dependencies": {
-    "node-appwrite": "^13.0.0"
-  }
-}
+{"name":"recharge-h5","version":"1.0.0","type":"module","dependencies":{"node-appwrite":"^13.0.0"}}
